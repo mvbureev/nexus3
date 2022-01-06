@@ -12,8 +12,13 @@ services:
       - proxy
     expose:
       - 8081
+    ports:
+      - "10010:10010" # docker
+      - "10020:10020" # npm
     labels:
       - traefik.http.services.nexus.loadbalancer.server.port=8081
+      - traefik.http.services.nexus-docker.loadbalancer.server.port=10010
+      - traefik.http.services.nexus-npm.loadbalancer.server.port=10020
       - traefik.http.routers.nexus.rule=Host("nexus.${DOMAIN}")
       - traefik.http.routers.nexus.entrypoints=https
       - traefik.http.routers.nexus.tls=true
