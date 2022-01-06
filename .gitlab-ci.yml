@@ -1,0 +1,16 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  image: docker/compose
+  tags:
+    - portal-1
+  before_script:
+    - docker-compose ps
+    - docker-compose version
+    - docker info
+  script:
+    - docker-compose up -d
+  only:
+    - main

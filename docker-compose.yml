@@ -1,0 +1,28 @@
+version: "3.7"
+
+services:
+  nexus:
+    image: sonatype/nexus3
+    container_name: nexus
+    hostname: nexus
+    restart: unless-stopped
+    volumes:
+      - nexus:/nexus-data
+    networks:
+      - proxy
+    expose:
+      - 8081
+    labels:
+      - traefik.http.services.nexus.loadbalancer.server.port=8081
+      - traefik.http.routers.nexus.rule=Host("nexus.${DOMAIN}")
+      - traefik.http.routers.nexus.entrypoints=https
+      - traefik.http.routers.nexus.tls=true
+      - traefik.http.routers.nexus.tls.certresolver=${CERT_RESOLVER}
+      - traefik.docker.network=proxy
+
+volumes:
+  nexus:
+
+networks:
+  proxy:
+    external: true
