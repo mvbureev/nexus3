@@ -21,16 +21,6 @@ services:
       - traefik.http.routers.nexus.entrypoints=https
       - traefik.http.routers.nexus.tls=true
       - traefik.http.routers.nexus.tls.certresolver=${CERT_RESOLVER}
-      # - traefik.http.services.nexus-docker.loadbalancer.server.port=10010
-      - traefik.http.routers.nexus-docker.rule=Host("nexus.${DOMAIN}:10010")
-      - traefik.http.routers.nexus-docker.entrypoints=https
-      - traefik.http.routers.nexus-docker.tls=true
-      - traefik.http.routers.nexus-docker.tls.certresolver=${CERT_RESOLVER}
-      # - traefik.http.services.nexus-npm.loadbalancer.server.port=10020
-      - traefik.http.routers.nexus-npm.rule=Host("nexus.${DOMAIN}:10020")
-      - traefik.http.routers.nexus-npm.entrypoints=https
-      - traefik.http.routers.nexus-npm.tls=true
-      - traefik.http.routers.nexus-npm.tls.certresolver=${CERT_RESOLVER}
       - traefik.docker.network=proxy
 
 volumes:
