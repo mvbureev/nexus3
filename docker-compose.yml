@@ -24,7 +24,7 @@ services:
       - traefik.http.routers.nexus.tls=true
       - traefik.http.routers.nexus.tls.certresolver=${CERT_RESOLVER}
       # docker.nexus.${DOMAIN}
-      - traefik.http.routers.docker.rule=Host("docker.nexus.${DOMAIN}") && PathPrefix("/{version:(v1|v2)}/")
+      - traefik.http.routers.docker.rule=Host("docker.nexus.${DOMAIN}")
       - traefik.http.services.docker.loadbalancer.server.port=10010
       - traefik.http.routers.docker.service=docker
       - traefik.http.routers.docker.entrypoints=https
