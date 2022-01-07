@@ -19,34 +19,13 @@ services:
       - 8081 # admin
     labels:
       - traefik.docker.network=proxy
-      # nexus.${DOMAIN}
       - traefik.http.routers.nexus.rule=Host("nexus.${DOMAIN}")
       - traefik.http.services.nexus.loadbalancer.server.port=8081
       - traefik.http.routers.nexus.service=nexus
       - traefik.http.routers.nexus.entrypoints=https
       - traefik.http.routers.nexus.tls=true
       - traefik.http.routers.nexus.tls.certresolver=${CERT_RESOLVER}
-      # docker.nexus.${DOMAIN}
-      # - traefik.http.routers.docker.rule=Host("docker.nexus.${DOMAIN}")
-      # - traefik.http.services.docker.loadbalancer.server.port=10010
-      # - traefik.http.routers.docker.service=docker
-      # - traefik.http.routers.docker.entrypoints=https
-      # - traefik.http.routers.docker.tls=true
-      # - traefik.http.routers.docker.tls.certresolver=${CERT_RESOLVER}
-      # docker.nexus.${DOMAIN} hosted
-      # - traefik.http.routers.docker-hosted.rule=Host("docker.nexus.${DOMAIN}"))
-      # - traefik.http.services.docker-hosted.loadbalancer.server.port=10011
-      # - traefik.http.routers.docker-hosted.service=docker-hosted
-      # - traefik.http.routers.docker-hosted.entrypoints=https
-      # - traefik.http.routers.docker-hosted.tls=true
-      # - traefik.http.routers.docker-hosted.tls.certresolver=${CERT_RESOLVER}
-      # npm.nexus.${DOMAIN}
-      # - traefik.http.routers.npm.rule=Host("npm.nexus.${DOMAIN}")
-      # - traefik.http.services.npm.loadbalancer.server.port=10010
-      # - traefik.http.routers.npm.service=npm
-      # - traefik.http.routers.npm.entrypoints=https
-      # - traefik.http.routers.npm.tls=true
-      # - traefik.http.routers.npm.tls.certresolver=${CERT_RESOLVER}
+      - traefik.http.routers.registry.middlewares=traefik-compress
 
 volumes:
   nexus:
