@@ -13,8 +13,6 @@ services:
     ports:
       - "10010:10010" # docker
       - "10011:10011" # docker hosted
-      - "10020:10020" # npm
-      - "10021:10021" # npm hosted
     expose:
       - 8081 # admin
     labels:
