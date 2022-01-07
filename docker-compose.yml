@@ -10,12 +10,13 @@ services:
       - nexus:/nexus-data
     networks:
       - proxy
+    ports:
+      - "10010:10010" # docker
+      - "10011:10011" # docker hosted
+      - "10020:10020" # npm
+      - "10021:10021" # npm hosted
     expose:
       - 8081 # admin
-      - 10010 # docker
-      - 10011 # docker hosted
-      - 10020 # npm
-      - 10021 # npm hosted
     labels:
       - traefik.docker.network=proxy
       # nexus.${DOMAIN}
@@ -26,19 +27,19 @@ services:
       - traefik.http.routers.nexus.tls=true
       - traefik.http.routers.nexus.tls.certresolver=${CERT_RESOLVER}
       # docker.nexus.${DOMAIN}
-      - traefik.http.routers.docker.rule=Host("docker.nexus.${DOMAIN}")
-      - traefik.http.services.docker.loadbalancer.server.port=10010
-      - traefik.http.routers.docker.service=docker
-      - traefik.http.routers.docker.entrypoints=https
-      - traefik.http.routers.docker.tls=true
-      - traefik.http.routers.docker.tls.certresolver=${CERT_RESOLVER}
+      # - traefik.http.routers.docker.rule=Host("docker.nexus.${DOMAIN}")
+      # - traefik.http.services.docker.loadbalancer.server.port=10010
+      # - traefik.http.routers.docker.service=docker
+      # - traefik.http.routers.docker.entrypoints=https
+      # - traefik.http.routers.docker.tls=true
+      # - traefik.http.routers.docker.tls.certresolver=${CERT_RESOLVER}
       # docker.nexus.${DOMAIN} hosted
-      - traefik.http.routers.docker-hosted.rule=Host("docker.nexus.${DOMAIN}") && Path(`/mvbureev-private-registry`))
-      - traefik.http.services.docker-hosted.loadbalancer.server.port=10011
-      - traefik.http.routers.docker-hosted.service=docker-hosted
-      - traefik.http.routers.docker-hosted.entrypoints=https
-      - traefik.http.routers.docker-hosted.tls=true
-      - traefik.http.routers.docker-hosted.tls.certresolver=${CERT_RESOLVER}
+      # - traefik.http.routers.docker-hosted.rule=Host("docker.nexus.${DOMAIN}"))
+      # - traefik.http.services.docker-hosted.loadbalancer.server.port=10011
+      # - traefik.http.routers.docker-hosted.service=docker-hosted
+      # - traefik.http.routers.docker-hosted.entrypoints=https
+      # - traefik.http.routers.docker-hosted.tls=true
+      # - traefik.http.routers.docker-hosted.tls.certresolver=${CERT_RESOLVER}
       # npm.nexus.${DOMAIN}
       # - traefik.http.routers.npm.rule=Host("npm.nexus.${DOMAIN}")
       # - traefik.http.services.npm.loadbalancer.server.port=10010
