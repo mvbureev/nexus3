@@ -10,6 +10,7 @@ services:
       - nexus:/nexus-data
     environment:
       JAVA_MAX_MEM: 768m
+      INSTALL4J_ADD_VM_PARAMS: -XX:ActiveProcessorCount=4 -XX:MaxDirectMemorySize=1600m
     networks:
       - proxy
     ports:
