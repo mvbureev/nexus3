@@ -8,6 +8,8 @@ services:
     restart: unless-stopped
     volumes:
       - nexus:/nexus-data
+    environment:
+      JAVA_MAX_MEM: 768m
     networks:
       - proxy
     ports:
